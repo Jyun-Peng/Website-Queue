@@ -1,38 +1,115 @@
-.App {
-  text-align: center;
+:root {
+    --color-white: #fefefe;
+    --color-black: #333333;
+}
+* {
+    position: relative;
+    box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html {
+    font-size: 16px;
+    color: var(--color-black);
+    line-height: 1;
+}
+ul,
+li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+    margin: 0;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+a {
+    text-decoration: none;
+    color: var(--color-black);
+}
+button {
+    cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
+.inputbar-enter {
+    width: calc(100% - 2rem);
+    margin: 0 auto 1rem auto;
+    height: 3.75rem;
+    border-radius: 0.675rem;
 }
-
-@keyframes App-logo-spin {
-  from {
+.inputbar-enter > .content {
+    opacity: 0;
+}
+.inputbar-enter > .btn--close {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.inputbar-enter > .btn--close svg {
     transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+}
+.inputbar-enter-active {
+    width: 100%;
+    height: 14rem;
+    margin: 0 auto;
+    border-radius: 0;
+    transition: width 300ms, height 300ms, border-radius 300ms, margin 300ms;
+}
+.inputbar-enter-active > .content {
+    opacity: 1;
+    transition: opacity 500ms;
+}
+.inputbar-enter-active > .btn--close {
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, -100%);
+    transition: top 300ms, transform 300ms;
+}
+.inputbar-enter-active > .btn--close svg {
+    transform: rotate(45deg);
+    transition: transform 300ms;
+}
+.inputbar-exit {
+    width: 100%;
+    height: 14rem;
+    margin: 0 auto;
+    border-radius: 0;
+}
+.inputbar-exit > .content {
+    opacity: 1;
+}
+.inputbar-exit > .btn--close {
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, -100%);
+}
+.inputbar-exit > .btn--close svg {
+    transform: rotate(45deg);
+}
+.inputbar-exit-active {
+    width: calc(100% - 2rem);
+    margin: 0 auto 1rem auto;
+    height: 3.75rem;
+    border-radius: 0.675rem;
+    transition: width 300ms, height 300ms, border-radius 300ms, margin 300ms;
+}
+.inputbar-exit-active > .content {
+    opacity: 0;
+    transition: opacity 100ms;
+}
+.inputbar-exit-active > .btn--close {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    transition: top 300ms, transform 300ms;
+}
+.inputbar-exit > .btn--close svg {
+    transform: rotate(0deg);
+    transition: transform 300ms;
 }
