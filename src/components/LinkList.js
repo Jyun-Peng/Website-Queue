@@ -2,24 +2,24 @@ import React from 'react';
 import styled from 'styled-components';
 import LinkItem from './LinkItem';
 
-function LinkList({ links, setLinks }) {
-    const handleLinkClick = function (e) {
-        e.preventDefault();
-        window.open(e.target.href, '_blank');
-        const idx = e.target.dataset.idx;
-        const newLinks = [...links];
-        newLinks.splice(idx, 1);
-        setLinks(newLinks);
+const StyledList = styled.ul`
+    padding-top: 4rem;
+`;
+function LinkList({ data, handleRemoveData }) {
+    const handleLinkClick = function (idx, url) {
+        window.open(url, '_blank');
+
+        handleRemoveData(idx);
     };
 
     return (
-        <ul>
-            {links.map((link, idx) => (
-                <LinkItem key={idx} idx={idx} url={link.url} handleClick={handleLinkClick}>
+        <StyledList>
+            {data.links.map((link, idx) => (
+                <LinkItem key={link.id} idx={idx} url={link.url} handleLinkClick={handleLinkClick}>
                     {link.title}
                 </LinkItem>
             ))}
-        </ul>
+        </StyledList>
     );
 }
 

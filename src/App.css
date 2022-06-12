@@ -1,6 +1,10 @@
 :root {
     --color-white: #fefefe;
+    --color-gray: #bebebe;
     --color-black: #333333;
+    --color-dark: #6b9080;
+    --color-green: #16db65;
+    --color-light-green: #94f5b0;
 }
 * {
     position: relative;
