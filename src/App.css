@@ -1,10 +1,15 @@
 :root {
     --color-white: #fefefe;
-    --color-gray: #bebebe;
+    --color-gray: #cecece;
+    --color-gray-click: #aeaeae;
+    --color-dark-gray: #787878;
     --color-black: #333333;
     --color-dark: #6b9080;
     --color-green: #16db65;
+    --color-gold: #ffe135;
+    --color-dark-green: #16b957;
     --color-light-green: #94f5b0;
+    --shadow: 0px 4px 12px -2px rgba(0, 0, 0, 0.3);
 }
 * {
     position: relative;
@@ -42,6 +47,7 @@ button {
 }
 
 .inputbar-enter {
+    background-color: var(--color-gold);
     width: calc(100% - 2rem);
     margin: 0 auto 1rem auto;
     height: 3.75rem;
@@ -55,15 +61,20 @@ button {
     top: 50%;
     transform: translate(-50%, -50%);
 }
+.inputbar-enter > .btn--close > button {
+    background-color: var(--color-gold);
+    color: var(--color-white);
+}
 .inputbar-enter > .btn--close svg {
     transform: rotate(0deg);
 }
 .inputbar-enter-active {
+    background-color: var(--color-white);
     width: 100%;
-    height: 14rem;
+    height: 14.5rem;
     margin: 0 auto;
-    border-radius: 0;
-    transition: width 300ms, height 300ms, border-radius 300ms, margin 300ms;
+    border-radius: 0.675rem 0.675rem 0 0;
+    transition: width 300ms, height 300ms, border-radius 300ms, margin 300ms, background-color 300ms;
 }
 .inputbar-enter-active > .content {
     opacity: 1;
@@ -75,15 +86,29 @@ button {
     transform: translate(-50%, -100%);
     transition: top 300ms, transform 300ms;
 }
-.inputbar-enter-active > .btn--close svg {
+.inputbar-enter-active > .btn--close > button {
+    background-color: var(--color-white);
+    color: var(--color-gray);
+    transition: background-color 300ms, color 300ms;
+}
+.inputbar-enter-active > .btn--close > button > svg {
     transform: rotate(45deg);
     transition: transform 300ms;
 }
+.inputbar-enter-done {
+    background-color: var(--color-white);
+    border-radius: 0.675rem 0.675rem 0 0;
+}
+.inputbar-enter-done > .btn--close > button {
+    color: var(--color-gray);
+}
+
 .inputbar-exit {
+    background-color: var(--color-white);
     width: 100%;
     height: 14rem;
     margin: 0 auto;
-    border-radius: 0;
+    border-radius: 0.675rem 0.675rem 0 0;
 }
 .inputbar-exit > .content {
     opacity: 1;
@@ -93,15 +118,20 @@ button {
     top: 0;
     transform: translate(-50%, -100%);
 }
-.inputbar-exit > .btn--close svg {
+.inputbar-exit > .btn--close > button {
+    background-color: var(--color-white);
+    color: var(--color-gray);
+}
+.inputbar-exit > .btn--close > button > svg {
     transform: rotate(45deg);
 }
 .inputbar-exit-active {
+    background-color: var(--color-gold);
     width: calc(100% - 2rem);
     margin: 0 auto 1rem auto;
     height: 3.75rem;
     border-radius: 0.675rem;
-    transition: width 300ms, height 300ms, border-radius 300ms, margin 300ms;
+    transition: width 300ms, height 300ms, border-radius 300ms, margin 300ms, background-color 300ms;
 }
 .inputbar-exit-active > .content {
     opacity: 0;
@@ -113,7 +143,12 @@ button {
     transform: translate(-50%, -50%);
     transition: top 300ms, transform 300ms;
 }
-.inputbar-exit > .btn--close svg {
+.inputbar-exit-active > .btn--close > button {
+    background-color: var(--color-gold);
+    color: var(--color-white);
+    transition: background-color 300ms, color 300ms;
+}
+.inputbar-exit-active > .btn--close > button > svg {
     transform: rotate(0deg);
     transition: transform 300ms;
 }

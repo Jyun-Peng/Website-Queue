@@ -10,28 +10,35 @@ const StyledWrapper = styled.div`
 
     margin: 0 auto;
 
-    background-color: var(--color-light-green);
+    background-color: var(--color-black);
 `;
-const StyledInputBarWrapper = styled.div`
-    width: min(480px, 100%);
-    position: fixed;
-    bottom: 0;
-`;
+const StyledInputBarWrapper = styled.div``;
 const StyledLinkListWrapper = styled.div`
     padding: 0 1rem 6rem 1rem;
 `;
 
 const StyledTitle = styled.h1`
-    background-color: var(--color-white);
-    color: var(--color-green);
+    color: var(--color-white);
     font-size: 1.5rem;
+    /* background-color: var(--color-gold); */
     padding: 0.8rem 1rem;
-    margin-bottom: 2rem;
-    position: fixed;
-    top: 0;
-    width: min(480px, 100%);
+    box-shadow: var(--shadow);
 `;
+const FixedWrapper = styled.div`
+    display: flex;
+    position: fixed;
+    width: min(480px, 100%);
+    height: 100%;
+    top: 0;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: hidden;
+    pointer-events: none;
 
+    & > div {
+        pointer-events: auto;
+    }
+`;
 const defaultLinks = {
     count: 3,
     links: [
@@ -73,10 +80,12 @@ function App() {
                 <StyledLinkListWrapper>
                     <LinkList data={data} handleRemoveData={handleRemoveData} />
                 </StyledLinkListWrapper>
-                <StyledTitle>Website Links</StyledTitle>
-                <StyledInputBarWrapper>
-                    <InputBar handleAddData={handleAddData} />
-                </StyledInputBarWrapper>
+                <FixedWrapper>
+                    <StyledTitle>Your Links</StyledTitle>
+                    <StyledInputBarWrapper>
+                        <InputBar handleAddData={handleAddData} />
+                    </StyledInputBarWrapper>
+                </FixedWrapper>
             </StyledWrapper>
         </div>
     );

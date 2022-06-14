@@ -9,18 +9,14 @@ const StyledWrapper = styled.div`
 `;
 const StyledOpenWrapper = styled.div`
     padding: 1rem;
-    /* overflow: hidden; */
-    background-color: var(--color-white);
+    box-shadow: var(--shadow);
 `;
 const StyledOpenBtnWrapper = styled.div`
-    height: 100%;
-    width: calc(100% - 2rem);
-    margin: 0 auto 1rem auto;
+    padding: 0 1rem;
+    margin-bottom: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--color-white);
-    border-radius: 0.625rem;
 `;
 const StyledCloseBtnWrapper = styled.div`
     position: absolute;
@@ -35,30 +31,39 @@ const StyledBtnGroup = styled.div`
 // Buttons
 const StyledAddBtn = styled(Button)`
     color: var(--color-white);
+    background-color: var(--color-green);
     font-size: 1.25rem;
     width: 7rem;
     height: 2.25rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--color-green);
     border-radius: 10px;
     border: none;
+
+    &:active {
+        background-color: var(--color-dark-green);
+    }
 `;
 const StyledOpenBtn = styled(Button)`
-    color: var(--color-gray);
+    color: var(--color-white);
+    background-color: var(--color-gold);
     font-size: 1.75rem;
     width: 100%;
     height: 3.75rem;
-    background-color: transparent;
     border: none;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 0;
+    border-radius: 0.625rem;
+    box-shadow: var(--shadow);
+
+    &:active {
+        color: var(--color-gray-click);
+    }
 `;
 const StyledCloseBtn = styled(Button)`
-    color: var(--color-gray);
     font-size: 1.75rem;
     width: 3rem;
     height: 2.6rem;
@@ -68,26 +73,39 @@ const StyledCloseBtn = styled(Button)`
     background-color: var(--color-white);
     border-radius: 0.625rem 0.625rem 0 0;
     border: none;
+    /* box-shadow: var(--shadow); */
     & svg {
         transform: rotate(45deg);
+    }
+    &:active {
+        color: var(--color-gray-click);
     }
 `;
 const StyledLabel = styled.label`
     font-size: 1.25rem;
-    color: var(--color-black);
+    color: var(--color-dark-gray);
 `;
 const StyledInput = styled.input`
     display: block;
     width: 100%;
     height: 2.25rem;
-    background-color: var(--color-white);
+    color: var(--color-dark-gray);
+    background-color: var(--color-gray);
     border: 2px solid var(--color-gray);
     border-radius: 0.625rem;
     outline: none;
     margin-bottom: ${(props) => (props.mb ? props.mb : '0')};
-    margin-top: 0.25rem;
+    margin-top: 0.5rem;
     padding: 0 1rem;
     font-size: 1rem;
+    transition: background-color 300ms, border 300ms;
+    cursor: default;
+
+    &:focus {
+        background-color: var(--color-white);
+        border: 2px solid var(--color-green);
+        color: var(--color-black);
+    }
 `;
 
 function InputBar({ handleAddData }) {
@@ -137,6 +155,11 @@ function InputBar({ handleAddData }) {
                 onExited={() => setOpen(false)}
             >
                 <StyledOpenWrapper>
+                    <StyledCloseBtnWrapper className="btn--close">
+                        <StyledCloseBtn handleClick={handleClose}>
+                            <BsPlusLg />
+                        </StyledCloseBtn>
+                    </StyledCloseBtnWrapper>
                     <div className="content">
                         <StyledLabel>
                             Title
@@ -165,12 +188,6 @@ function InputBar({ handleAddData }) {
                             <StyledAddBtn handleClick={handleAdd}>{<BsPlusLg />}</StyledAddBtn>
                         </StyledBtnGroup>
                     </div>
-
-                    <StyledCloseBtnWrapper className="btn--close">
-                        <StyledCloseBtn handleClick={handleClose}>
-                            <BsPlusLg />
-                        </StyledCloseBtn>
-                    </StyledCloseBtnWrapper>
                 </StyledOpenWrapper>
             </CSSTransition>
         </StyledWrapper>
