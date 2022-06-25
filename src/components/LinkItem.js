@@ -10,22 +10,15 @@ const StyledItem = styled.li`
 const StyledLink = styled.a`
     display: block;
     background-color: var(--color-white);
-    border-radius: 0.625rem;
+    opacity: 0.7;
+    border-radius: 0.4rem;
     font-size: 1.25rem;
     line-height: 1.2;
     padding: 0.8rem 1rem 0.8rem 1rem;
     text-decoration: none;
-    box-shadow: 0 0 0 var(--color-gold);
-
-    transition: transform 100ms, box-shadow 100ms;
+    transition: opacity 0.2s;
     &:hover {
-        transform: translateY(-0.35rem);
-        box-shadow: 0 0.35rem 0 var(--color-gold);
-    }
-    &:active {
-        transform: translateY(-0.2rem);
-        box-shadow: 0 0.2rem 0 var(--color-gold);
-        transition: none;
+        opacity: 1;
     }
 `;
 
