@@ -3,17 +3,17 @@ import styled from 'styled-components';
 import { BsPlusLg, BsXLg } from 'react-icons/bs';
 import { CSSTransition } from 'react-transition-group';
 import Button from './Button';
+import '../cssAnimation/inputBar.css';
 
 const StyledWrapper = styled.div`
     width: 100%;
 `;
-const StyledOpenWrapper = styled.div`
+const StyledMainWrapper = styled.div`
+    background-color: var(--color-white);
     padding: 1rem;
-    box-shadow: var(--shadow);
 `;
 const StyledOpenBtnWrapper = styled.div`
-    padding: 0 1rem;
-    margin-bottom: 1rem;
+    padding: 0 1rem 1rem 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,8 +46,8 @@ const StyledAddBtn = styled(Button)`
     }
 `;
 const StyledOpenBtn = styled(Button)`
-    color: var(--color-white);
-    background-color: var(--color-gold);
+    color: var(--color-gray);
+    background-color: var(--color-white);
     font-size: 1.75rem;
     width: 100%;
     height: 3.75rem;
@@ -57,13 +57,14 @@ const StyledOpenBtn = styled(Button)`
     align-items: center;
     padding: 0;
     border-radius: 0.625rem;
-    box-shadow: var(--shadow);
 
     &:active {
         color: var(--color-gray-click);
     }
 `;
 const StyledCloseBtn = styled(Button)`
+    background-color: var(--color-white);
+    color: var(--color-gray);
     font-size: 1.75rem;
     width: 3rem;
     height: 2.6rem;
@@ -91,7 +92,7 @@ const StyledInput = styled.input`
     height: 2.25rem;
     color: var(--color-dark-gray);
     background-color: var(--color-gray);
-    border: 2px solid var(--color-gray);
+    border: 2px solid ${(props) => (props.valid ? 'var(--color-gray)' : 'var(--color-warning)')};
     border-radius: 0.625rem;
     outline: none;
     margin-bottom: ${(props) => (props.mb ? props.mb : '0')};
@@ -108,53 +109,69 @@ const StyledInput = styled.input`
     }
 `;
 
-function InputBar({ handleAddData }) {
-    const [open, setOpen] = useState(false);
-    const [show, setShow] = useState(false);
+function checkValidURL(url) {
+    let res;
+    try {
+        res = new URL(url);
+    } catch (err) {
+        return false;
+    }
+    return true;
+}
+
+function InputBar({ handleAddData, isOpen, setIsOpen }) {
+    const [isOn, setIsOn] = useState(false);
+    const [titleValid, setTitleValid] = useState(true);
+    const [urlValid, setUrlValid] = useState(true);
     const [title, setTitle] = useState('');
     const [url, setUrl] = useState('');
     const titleRef = useRef(null);
     const urlRef = useRef(null);
-    const handleTitleTyping = (e) => {
-        setTitle(titleRef.current.value);
-    };
-    const handleUrlTyping = (e) => {
-        setUrl(urlRef.current.value);
+    const handleTyping = (ref, setFunction) => {
+        setFunction(ref.current.value);
     };
     const handleAdd = (e) => {
         // e.preventDefault();
-        if (title === '' || url === '') return;
+        const titleIsValid = title !== '';
+        const urlIsValid = url !== '' && checkValidURL(url);
+        if (!titleIsValid || !urlIsValid) {
+            if (!titleIsValid) setTitleValid(false);
+            if (!urlIsValid) setUrlValid(false);
+            return;
+        }
         handleAddData(title, url);
         setTitle('');
         setUrl('');
-        setShow(false);
+        setIsOpen(false);
     };
     const handleOpen = (e) => {
         // e.preventDefault();
-        setShow(true);
+        setTitleValid(true);
+        setUrlValid(true);
+        setIsOpen(true);
     };
     const handleClose = (e) => {
         // e.preventDefault();
         setTitle('');
         setUrl('');
-        setShow(false);
+        setIsOpen(false);
     };
     return (
-        <StyledWrapper open={open}>
-            {!open && (
+        <StyledWrapper>
+            {!isOn && (
                 <StyledOpenBtnWrapper>
-                    <StyledOpenBtn handleClick={handleOpen.bind(this)}>{<BsPlusLg />}</StyledOpenBtn>
+                    <StyledOpenBtn handleClick={handleOpen}>{<BsPlusLg />}</StyledOpenBtn>
                 </StyledOpenBtnWrapper>
             )}
             <CSSTransition
-                in={show}
+                in={isOpen}
                 timeout={300}
                 classNames="inputbar"
                 unmountOnExit
-                onEnter={() => setOpen(true)}
-                onExited={() => setOpen(false)}
+                onEnter={() => setIsOn(true)}
+                onExited={() => setIsOn(false)}
             >
-                <StyledOpenWrapper>
+                <StyledMainWrapper>
                     <StyledCloseBtnWrapper className="btn--close">
                         <StyledCloseBtn handleClick={handleClose}>
                             <BsPlusLg />
@@ -165,8 +182,10 @@ function InputBar({ handleAddData }) {
                             Title
                             <StyledInput
                                 ref={titleRef}
+                                valid={titleValid}
                                 type="text"
-                                onChange={handleTitleTyping}
+                                onChange={() => handleTyping(titleRef, setTitle)}
+                                onClick={() => setTitleValid(true)}
                                 value={title}
                                 name="title"
                                 mb="0.75rem"
@@ -177,8 +196,10 @@ function InputBar({ handleAddData }) {
                             URL
                             <StyledInput
                                 ref={urlRef}
+                                valid={urlValid}
                                 type="text"
-                                onChange={handleUrlTyping}
+                                onChange={() => handleTyping(urlRef, setUrl)}
+                                onClick={() => setUrlValid(true)}
                                 value={url}
                                 name="url"
                                 mb="1.5rem"
@@ -188,7 +209,7 @@ function InputBar({ handleAddData }) {
                             <StyledAddBtn handleClick={handleAdd}>{<BsPlusLg />}</StyledAddBtn>
                         </StyledBtnGroup>
                     </div>
-                </StyledOpenWrapper>
+                </StyledMainWrapper>
             </CSSTransition>
         </StyledWrapper>
     );
