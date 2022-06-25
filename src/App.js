@@ -10,19 +10,17 @@ const StyledWrapper = styled.div`
 
     margin: 0 auto;
 
-    background-color: var(--color-black);
+    background-color: var(--color-main);
 `;
-const StyledInputBarWrapper = styled.div``;
 const StyledLinkListWrapper = styled.div`
-    padding: 0 1rem 6rem 1rem;
+    padding: 4.5rem 1rem 6rem 1rem;
 `;
 
 const StyledTitle = styled.h1`
     color: var(--color-white);
+    background-color: var(--color-main);
     font-size: 1.5rem;
-    /* background-color: var(--color-gold); */
-    padding: 0.8rem 1rem;
-    box-shadow: var(--shadow);
+    padding: 1.5rem 1rem;
 `;
 const FixedWrapper = styled.div`
     display: flex;
@@ -39,20 +37,17 @@ const FixedWrapper = styled.div`
         pointer-events: auto;
     }
 `;
-const defaultLinks = {
-    count: 3,
-    links: [
-        {
-            id: 0,
-            title: 'stackoverflow',
-            url: 'https://stackoverflow.com/questions/2789703/remove-blue-underline-from-link',
-        },
-        { id: 1, title: '我以為', url: 'https://www.youtube.com/watch?v=tYj3zJIDyso' },
-        { id: 2, title: 'Minecraft', url: 'https://minecraft.fandom.com/wiki/Bedrock_Edition_1.18.12' },
-    ],
-};
+const Mask = styled.div`
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: opacity 300ms, visibility 300ms;
+    ${(props) => (props.active ? 'opacity: 1;' : 'opacity: 0; visibility: hidden;')}
+`;
 function App() {
     const [data, setData] = useState({ count: 0, links: [] });
+    const [inputIsOpen, setInputIsOpen] = useState(false);
     const handleAddData = function (title, url) {
         const { count, links } = data;
         const newData = { count: count + 1, links: [...links, { id: count, title: title, url: url }] };
@@ -82,9 +77,9 @@ function App() {
                 </StyledLinkListWrapper>
                 <FixedWrapper>
                     <StyledTitle>Your Links</StyledTitle>
-                    <StyledInputBarWrapper>
-                        <InputBar handleAddData={handleAddData} />
-                    </StyledInputBarWrapper>
+
+                    <Mask active={inputIsOpen}></Mask>
+                    <InputBar handleAddData={handleAddData} isOpen={inputIsOpen} setIsOpen={setInputIsOpen} />
                 </FixedWrapper>
             </StyledWrapper>
         </div>
