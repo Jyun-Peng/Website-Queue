@@ -50,7 +50,7 @@ function LinkItem({ idx, url, children, handleLinkClick }) {
     };
     return (
         <StyledItem ref={ref} onClick={handleClick}>
-            <StyledLink href="#!" onClick={(e) => e.preventDefault()}>
+            <StyledLink href="#!" onClick={(e) => e.preventDefault()} draggable="false">
                 {children}
             </StyledLink>
         </StyledItem>
