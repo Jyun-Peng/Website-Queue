@@ -7,13 +7,23 @@ import '../cssAnimation/inputBar.css';
 
 const StyledWrapper = styled.div`
     width: 100%;
+    &:before {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 5.5rem;
+        background: linear-gradient(transparent, #8338ecbf 50%, #8338ecdf 100%);
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
 `;
 const StyledMainWrapper = styled.div`
     background-color: var(--color-white);
     padding: 1rem;
 `;
 const StyledOpenBtnWrapper = styled.div`
-    padding: 0 1rem 1rem 1rem;
+    padding: 1.5rem 1rem 1rem 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -50,7 +60,7 @@ const StyledOpenBtn = styled(Button)`
     background-color: var(--color-white);
     font-size: 1.75rem;
     width: 100%;
-    height: 3.75rem;
+    height: 3rem;
     border: none;
     display: flex;
     justify-content: center;
@@ -83,21 +93,20 @@ const StyledCloseBtn = styled(Button)`
     }
 `;
 const StyledLabel = styled.label`
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     color: var(--color-dark-gray);
 `;
 const StyledInput = styled.input`
     display: block;
     width: 100%;
-    height: 2.25rem;
     color: var(--color-dark-gray);
     background-color: var(--color-gray);
-    border: 2px solid ${(props) => (props.valid ? 'var(--color-gray)' : 'var(--color-warning)')};
-    border-radius: 0.625rem;
+    border: 0.125rem solid ${(props) => (props.valid ? 'var(--color-gray)' : 'var(--color-warning)')};
+    border-radius: 0.925rem;
     outline: none;
     margin-bottom: ${(props) => (props.mb ? props.mb : '0')};
-    margin-top: 0.5rem;
-    padding: 0 1rem;
+    margin-top: 0.4rem;
+    padding: 0.25rem 1rem;
     font-size: 1rem;
     transition: background-color 300ms, border 300ms;
     cursor: default;
@@ -107,8 +116,10 @@ const StyledInput = styled.input`
         border: 2px solid var(--color-green);
         color: var(--color-black);
     }
+    &::placeholder {
+        color: rgba(0, 0, 0, 0.3);
+    }
 `;
-
 function checkValidURL(url) {
     let res;
     try {
@@ -118,7 +129,6 @@ function checkValidURL(url) {
     }
     return true;
 }
-
 function InputBar({ handleAddData, isOpen, setIsOpen }) {
     const [isOn, setIsOn] = useState(false);
     const [titleValid, setTitleValid] = useState(true);
@@ -131,27 +141,30 @@ function InputBar({ handleAddData, isOpen, setIsOpen }) {
         setFunction(ref.current.value);
     };
     const handleAdd = (e) => {
-        // e.preventDefault();
-        const titleIsValid = title !== '';
-        const urlIsValid = url !== '' && checkValidURL(url);
-        if (!titleIsValid || !urlIsValid) {
-            if (!titleIsValid) setTitleValid(false);
-            if (!urlIsValid) setUrlValid(false);
+        if (title === '' || url === '') {
+            if (title === '') setTitleValid(false);
+            if (url === '') setUrlValid(false);
             return;
         }
-        handleAddData(title, url);
+        let hostname;
+        try {
+            const u = new URL(url);
+            hostname = u.hostname;
+        } catch (err) {
+            setUrlValid(false);
+            return;
+        }
+        handleAddData(title, url, hostname);
         setTitle('');
         setUrl('');
         setIsOpen(false);
     };
     const handleOpen = (e) => {
-        // e.preventDefault();
         setTitleValid(true);
         setUrlValid(true);
         setIsOpen(true);
     };
     const handleClose = (e) => {
-        // e.preventDefault();
         setTitle('');
         setUrl('');
         setIsOpen(false);
@@ -189,6 +202,7 @@ function InputBar({ handleAddData, isOpen, setIsOpen }) {
                                 value={title}
                                 name="title"
                                 mb="0.75rem"
+                                placeholder="Never gonna give you up"
                             />
                         </StyledLabel>
 
@@ -202,7 +216,8 @@ function InputBar({ handleAddData, isOpen, setIsOpen }) {
                                 onClick={() => setUrlValid(true)}
                                 value={url}
                                 name="url"
-                                mb="1.5rem"
+                                mb="1.4rem"
+                                placeholder="https://www.metube.com/"
                             />
                         </StyledLabel>
                         <StyledBtnGroup>

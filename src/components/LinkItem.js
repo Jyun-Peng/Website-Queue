@@ -12,13 +12,22 @@ const StyledLink = styled.a`
     background-color: var(--color-white);
     opacity: 0.7;
     border-radius: 0.4rem;
-    font-size: 1.25rem;
+    font-size: 1rem;
     line-height: 1.2;
-    padding: 0.8rem 1rem 0.8rem 1rem;
+    padding: 0.5rem 0.8rem;
     text-decoration: none;
     transition: opacity 0.2s;
     &:hover {
         opacity: 1;
+    }
+    & > h3 {
+        font-size: 1rem;
+        line-height: 1;
+        margin-bottom: 0.25rem;
+    }
+    & > p {
+        font-size: 0.8rem;
+        line-height: 1;
     }
 `;
 
