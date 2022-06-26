@@ -13,14 +13,13 @@ const StyledWrapper = styled.div`
     background-color: var(--color-main);
 `;
 const StyledLinkListWrapper = styled.div`
-    padding: 4.5rem 1rem 6rem 1rem;
+    padding: 0 1rem 6rem 1rem;
 `;
 
 const StyledTitle = styled.h1`
     color: var(--color-white);
-    background-color: var(--color-main);
     font-size: 1.5rem;
-    padding: 1.5rem 1rem;
+    padding: 1.5rem 0;
 `;
 const FixedWrapper = styled.div`
     display: flex;
@@ -48,9 +47,12 @@ const Mask = styled.div`
 function App() {
     const [data, setData] = useState({ count: 0, links: [] });
     const [inputIsOpen, setInputIsOpen] = useState(false);
-    const handleAddData = function (title, url) {
+    const handleAddData = function (title, url, hostname) {
         const { count, links } = data;
-        const newData = { count: count + 1, links: [...links, { id: count, title: title, url: url }] };
+        const newData = {
+            count: count + 1,
+            links: [...links, { id: count, title: title, url: url, hostname: hostname }],
+        };
         setData(newData);
         localStorage.setItem('data', JSON.stringify(newData));
     };
@@ -73,11 +75,11 @@ function App() {
         <div className="App">
             <StyledWrapper>
                 <StyledLinkListWrapper>
+                    <StyledTitle>Your Links</StyledTitle>
                     <LinkList data={data} handleRemoveData={handleRemoveData} />
                 </StyledLinkListWrapper>
                 <FixedWrapper>
-                    <StyledTitle>Your Links</StyledTitle>
-
+                    <div></div>
                     <Mask active={inputIsOpen}></Mask>
                     <InputBar handleAddData={handleAddData} isOpen={inputIsOpen} setIsOpen={setInputIsOpen} />
                 </FixedWrapper>
