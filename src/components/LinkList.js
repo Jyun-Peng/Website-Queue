@@ -11,11 +11,14 @@ function LinkList({ data, handleRemoveData }) {
 
     return (
         <ul>
-            {data.links.map((link, idx) => (
-                <LinkItem key={link.id} idx={idx} url={link.url} handleLinkClick={handleLinkClick}>
-                    {link.title}
-                </LinkItem>
-            ))}
+            {data.links.map((link, idx) => {
+                return (
+                    <LinkItem key={link.id} idx={idx} url={link.url} handleLinkClick={handleLinkClick}>
+                        <h3>{link.title}</h3>
+                        <p>{link.hostname}</p>
+                    </LinkItem>
+                );
+            })}
         </ul>
     );
 }
