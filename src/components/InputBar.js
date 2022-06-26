@@ -12,7 +12,7 @@ const StyledWrapper = styled.div`
         display: block;
         width: 100%;
         height: 5.5rem;
-        background: linear-gradient(transparent, #8338ecbf 50%, #8338ecdf 100%);
+        background: linear-gradient(transparent, #8338ecaa 60%, #8338ecbf 100%);
         position: absolute;
         bottom: 0;
         left: 0;
