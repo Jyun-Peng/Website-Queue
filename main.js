@@ -1,12 +1,12 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, shell } = require('electron');
 const path = require('path');
 const isDev = require('electron-is-dev');
 
 const createWindow = () => {
     const win = new BrowserWindow({
-        width: 480,
+        width: 400,
         height: 600,
-        // resizable: false,
+        resizable: false,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
         },
@@ -19,6 +19,10 @@ const createWindow = () => {
         win.loadFile('./public/index.html');
     }
     win.removeMenu();
+    win.webContents.on('new-window', (e, url) => {
+        e.preventDefault();
+        shell.openExternal(url);
+    });
 };
 
 app.whenReady().then(() => {
