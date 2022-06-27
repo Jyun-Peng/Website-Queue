@@ -205,7 +205,7 @@ function InputBar({ handleAddData, isOpen, setIsOpen }) {
                                 value={title}
                                 name="title"
                                 mb="0.75rem"
-                                placeholder="Never gonna give you up"
+                                placeholder="Enter a title"
                             />
                         </StyledLabel>
 
@@ -220,7 +220,7 @@ function InputBar({ handleAddData, isOpen, setIsOpen }) {
                                 value={url}
                                 name="url"
                                 mb="1.4rem"
-                                placeholder="https://www.metube.com/"
+                                placeholder="Enter an URL"
                             />
                         </StyledLabel>
                         <StyledBtnGroup>
