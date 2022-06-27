@@ -93,12 +93,24 @@ const StyledCloseBtn = styled(Button)`
     }
 `;
 const StyledLabel = styled.label`
+    display: block;
     font-size: 1.2rem;
     color: var(--color-dark-gray);
+    &:after {
+        content: '${(props) => props.warning}';
+        position: absolute;
+        right: 0;
+        bottom: 2.15rem;
+        font-size: 1rem;
+        color: var(--color-warning);
+        opacity: ${(props) => (props.valid ? '0' : '1')};
+        transition: opacity 300ms;
+    }
 `;
 const StyledInput = styled.input`
     display: block;
     width: 100%;
+    height: 1.75rem;
     color: var(--color-dark-gray);
     background-color: var(--color-gray);
     border: 0.125rem solid ${(props) => (props.valid ? 'var(--color-gray)' : 'var(--color-warning)')};
@@ -106,7 +118,7 @@ const StyledInput = styled.input`
     outline: none;
     margin-bottom: ${(props) => (props.mb ? props.mb : '0')};
     margin-top: 0.4rem;
-    padding: 0.25rem 1rem;
+    padding: 0 1rem;
     font-size: 1rem;
     transition: background-color 300ms, border 300ms;
     cursor: default;
@@ -120,15 +132,6 @@ const StyledInput = styled.input`
         color: rgba(0, 0, 0, 0.3);
     }
 `;
-function checkValidURL(url) {
-    let res;
-    try {
-        res = new URL(url);
-    } catch (err) {
-        return false;
-    }
-    return true;
-}
 function InputBar({ handleAddData, isOpen, setIsOpen }) {
     const [isOn, setIsOn] = useState(false);
     const [titleValid, setTitleValid] = useState(true);
@@ -191,7 +194,7 @@ function InputBar({ handleAddData, isOpen, setIsOpen }) {
                         </StyledCloseBtn>
                     </StyledCloseBtnWrapper>
                     <div className="content">
-                        <StyledLabel>
+                        <StyledLabel warning={'Invalid title'} valid={titleValid}>
                             Title
                             <StyledInput
                                 ref={titleRef}
@@ -206,7 +209,7 @@ function InputBar({ handleAddData, isOpen, setIsOpen }) {
                             />
                         </StyledLabel>
 
-                        <StyledLabel>
+                        <StyledLabel warning={'Invalid URL'} valid={urlValid}>
                             URL
                             <StyledInput
                                 ref={urlRef}
