@@ -7,6 +7,7 @@ const createWindow = () => {
         width: 400,
         height: 600,
         resizable: false,
+        icon: './websiteQueueIcon.ico',
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
         },
