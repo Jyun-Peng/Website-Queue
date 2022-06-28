@@ -6,7 +6,7 @@ const createWindow = () => {
     const win = new BrowserWindow({
         width: 400,
         height: 600,
-        resizable: false,
+        // resizable: false,
         icon: './websiteQueueIcon.ico',
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
@@ -17,7 +17,7 @@ const createWindow = () => {
         win.loadURL('http://localhost:3000/');
         win.webContents.openDevTools();
     } else {
-        win.loadFile('./public/index.html');
+        win.loadFile('./build/index.html');
     }
     win.removeMenu();
     win.webContents.on('new-window', (e, url) => {

@@ -3,6 +3,7 @@
     "version": "0.1.0",
     "description": "My first electron app.",
     "main": "main.js",
+    "homepage": "./",
     "private": true,
     "dependencies": {
         "@testing-library/jest-dom": "^5.16.4",
@@ -24,7 +25,9 @@
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject",
-        "electron-start": "wait-on tcp:3000 && electron ."
+        "electron-start": "wait-on tcp:3000 && electron .",
+        "dist": "electron-builder",
+        "pack": "electron-builder --dir"
     },
     "eslintConfig": {
         "extends": [
@@ -45,6 +48,30 @@
         ]
     },
     "devDependencies": {
-        "electron": "^19.0.2"
+        "electron": "^19.0.2",
+        "electron-builder": "^23.1.0"
+    },
+    "build": {
+        "appId": "com.jyunpenghuang.electron.app",
+        "productName": "website queue",
+        "copyright": "Copyright © 2022 Jyun-Peng Huang",
+        "directories": {
+            "output": "../electron-build/win"
+        },
+        "win": {
+            "target": [
+                "nsis",
+                "portable"
+            ],
+            "icon": "./websiteQueueIcon.ico"
+        },
+        "files": [
+            "build/**/*",
+            "node_modules/**/*",
+            "package.json",
+            "main.js",
+            "preload.js"
+        ],
+        "extends": null
     }
 }
