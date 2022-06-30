@@ -1,7 +1,7 @@
 {
     "name": "website_queue",
-    "version": "0.1.0",
-    "description": "My first electron app.",
+    "version": "1.0.0",
+    "description": "A queue of links for watch later built with Electron.",
     "main": "main.js",
     "homepage": "./",
     "private": true,
