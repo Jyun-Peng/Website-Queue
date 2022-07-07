@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
-import { BsPlusLg, BsXLg } from 'react-icons/bs';
+import { BsPlusLg } from 'react-icons/bs';
 import { CSSTransition } from 'react-transition-group';
 import Button from './Button';
 import '../cssAnimation/inputBar.css';

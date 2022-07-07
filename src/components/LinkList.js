@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import LinkItem from './LinkItem';
 
 function LinkList({ data, handleRemoveData }) {
