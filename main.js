@@ -27,14 +27,19 @@ const createWindow = () => {
     });
 };
 
-app.whenReady().then(() => {
-    createWindow();
+const lock = app.requestSingleInstanceLock();
 
-    app.on('activate', () => {
-        // On macOS it's common to re-create a window in the app when the
-        // dock icon is clicked and there are no other windows open.
-        if (BrowserWindow.getAllWindows().length === 0) createWindow();
-    });
+app.whenReady().then(() => {
+    if (!lock) {
+        app.quit();
+    } else {
+        createWindow();
+        app.on('activate', () => {
+            // On macOS it's common to re-create a window in the app when the
+            // dock icon is clicked and there are no other windows open.
+            if (BrowserWindow.getAllWindows().length === 0) createWindow();
+        });
+    }
 });
 
 app.on('window-all-closed', () => {
