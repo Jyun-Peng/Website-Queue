@@ -62,7 +62,12 @@
                 "nsis",
                 "portable"
             ],
-            "icon": "./websiteQueueIcon.ico"
+            "icon": "./icon.ico"
+        },
+        "nsis": {
+            "oneClick": false,
+            "allowToChangeInstallationDirectory": true,
+            "installerIcon": "./installerIcon.ico"
         },
         "files": [
             "build/**/*",
