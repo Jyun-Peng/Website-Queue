@@ -50,8 +50,8 @@ const StyledAddBtn = styled(Button)`
     border: none;
 
     & > svg {
-        width: 1.25rem;
-        height: 1.25rem;
+        width: 1.5rem;
+        height: 1.5rem;
         stroke: var(--color-white);
     }
     &:active {
