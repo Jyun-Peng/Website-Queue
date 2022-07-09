@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
-import { BsPlusLg } from 'react-icons/bs';
+import { ReactComponent as Plus } from '../icons/plus.svg';
 import { CSSTransition } from 'react-transition-group';
 import Button from './Button';
 import '../cssAnimation/inputBar.css';
@@ -40,9 +40,7 @@ const StyledBtnGroup = styled.div`
 `;
 // Buttons
 const StyledAddBtn = styled(Button)`
-    color: var(--color-white);
     background-color: var(--color-green);
-    font-size: 1.25rem;
     width: 7rem;
     height: 2.25rem;
     display: flex;
@@ -51,14 +49,17 @@ const StyledAddBtn = styled(Button)`
     border-radius: 10px;
     border: none;
 
+    & > svg {
+        width: 1.25rem;
+        height: 1.25rem;
+        stroke: var(--color-white);
+    }
     &:active {
         background-color: var(--color-dark-green);
     }
 `;
 const StyledOpenBtn = styled(Button)`
-    color: var(--color-gray);
     background-color: var(--color-white);
-    font-size: 1.75rem;
     width: 100%;
     height: 3rem;
     border: none;
@@ -68,14 +69,17 @@ const StyledOpenBtn = styled(Button)`
     padding: 0;
     border-radius: 0.625rem;
 
-    &:active {
-        color: var(--color-gray-click);
+    & > svg {
+        width: 2rem;
+        height: 2rem;
+        stroke: var(--color-gray);
+    }
+    &:active > svg {
+        stroke: var(--color-gray-click);
     }
 `;
 const StyledCloseBtn = styled(Button)`
     background-color: var(--color-white);
-    color: var(--color-gray);
-    font-size: 1.75rem;
     width: 3rem;
     height: 2.6rem;
     display: flex;
@@ -86,10 +90,12 @@ const StyledCloseBtn = styled(Button)`
     border: none;
     /* box-shadow: var(--shadow); */
     & svg {
-        transform: rotate(45deg);
+        width: 2rem;
+        height: 2rem;
+        stroke: var(--color-gray);
     }
-    &:active {
-        color: var(--color-gray-click);
+    &:active > svg {
+        stroke: var(--color-gray-click);
     }
 `;
 const StyledLabel = styled.label`
@@ -176,7 +182,9 @@ function InputBar({ handleAddData, isOpen, setIsOpen }) {
         <StyledWrapper>
             {!isOn && (
                 <StyledOpenBtnWrapper>
-                    <StyledOpenBtn handleClick={handleOpen}>{<BsPlusLg />}</StyledOpenBtn>
+                    <StyledOpenBtn handleClick={handleOpen}>
+                        <Plus />
+                    </StyledOpenBtn>
                 </StyledOpenBtnWrapper>
             )}
             <CSSTransition
@@ -190,7 +198,7 @@ function InputBar({ handleAddData, isOpen, setIsOpen }) {
                 <StyledMainWrapper>
                     <StyledCloseBtnWrapper className="btn--close">
                         <StyledCloseBtn handleClick={handleClose}>
-                            <BsPlusLg />
+                            <Plus />
                         </StyledCloseBtn>
                     </StyledCloseBtnWrapper>
                     <div className="content">
@@ -224,7 +232,9 @@ function InputBar({ handleAddData, isOpen, setIsOpen }) {
                             />
                         </StyledLabel>
                         <StyledBtnGroup>
-                            <StyledAddBtn handleClick={handleAdd}>{<BsPlusLg />}</StyledAddBtn>
+                            <StyledAddBtn handleClick={handleAdd}>
+                                <Plus />
+                            </StyledAddBtn>
                         </StyledBtnGroup>
                     </div>
                 </StyledMainWrapper>
