@@ -37,6 +37,9 @@
 .inputbar-enter-done {
     border-radius: 0.675rem 0.675rem 0 0;
 }
+.inputbar-enter-done > .btn--close > button > svg {
+    transform: rotate(45deg);
+}
 .inputbar-exit {
     height: 13.1rem;
     margin: 0 0 0 0;
