@@ -1,6 +1,7 @@
 {
     "name": "website_queue",
-    "version": "1.0.0",
+    "author": "Jyun-Peng",
+    "version": "1.0.1",
     "description": "A queue of links for watch later built with Electron.",
     "main": "main.js",
     "homepage": "./",
