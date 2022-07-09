@@ -25,4 +25,4 @@ A queue of links for watch later built with Electron.
 
 ## Download
 
-Portable and Setup builds for the latest release can be downloaded from [here](https://github.com/Jyun-Peng/Website-queue/releases/tag/v0.0.0).
+Portable and Setup builds for the latest release can be downloaded from [here](https://github.com/Jyun-Peng/Website-queue/releases/tag/v1.0.1).
