@@ -6,6 +6,7 @@ const createWindow = () => {
     const win = new BrowserWindow({
         width: 400,
         height: 600,
+        resizable: false,
         icon: './websiteQueueIcon.ico',
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
@@ -17,7 +18,6 @@ const createWindow = () => {
         win.resizable = true;
         win.webContents.openDevTools();
     } else {
-        win.resizable = false;
         win.loadFile('./build/index.html');
     }
     win.removeMenu();
